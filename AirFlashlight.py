@@ -107,9 +107,10 @@ while True:
     
         eCO2Level = bme688.readeCO2()
         oled.displayText("CO2: " + str(eCO2Level) + " ppm", 2, 13)
-        oled.displayText("Pres: " + str(bme688.readPressure()) + " Pa", 3, 8)
-        oled.displayText(str(bme688.readHumidity()) + "%", 6, 8)
-        oled.displayText(str(bme688.readTemperature()) + "C", 6, 70)
+        oled.displayText(str(bme688.readPressure()/100) + " hPa", 3, 18)
+        oled.displayText(str(bme688.getAirQualityPercent()) + "%", 6, 100)
+        oled.displayText(str(bme688.readHumidity()) + "%", 6, 1)
+        oled.displayText(str(bme688.readTemperature()) + "C", 6, 40)
     
         oled.show()
         dangerLeds(eCO2Level)
@@ -118,7 +119,7 @@ while True:
     if(flashlightState != 0):    
         if(flashlightState == 1):
             oled.clear()
-            oled.drawRect(1, 1, 63, 67, fill=True)
+#            oled.drawRect(1, 1, 63, 67, fill=True)
             oled.show()
             for i in range (0, 3):
                 zipleds.setLED(i, RED)
@@ -132,4 +133,3 @@ while True:
             
         zipleds.show()
     
-
